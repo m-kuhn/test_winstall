@@ -9,10 +9,19 @@ on:
 jobs:
   build:
     runs-on: windows-2019
+    env:
+      # See https://download.osgeo.org/qgis/win64
+      QGIS_VERSION: QGIS-OSGeo4W-3.16.6-1
 
     steps:
       - uses: actions/checkout@v2
+      - name: Cache installer
+        uses: actions/cache@v2
+        with:
+          path: |
+            QGIS.msi
+          key: ${{ env.QGIS_VERSION }}
       - name: Install QGIS
         run: |
-          (New-Object System.Net.WebClient).DownloadFile("https://download.osgeo.org/qgis/win64/QGIS-OSGeo4W-3.16.6-1.msi", "QGIS.msi")
+          (New-Object System.Net.WebClient).DownloadFile("https://download.osgeo.org/qgis/win64/${{ env.QGIS_VERSION }}.msi", "QGIS.msi")
           msiexec /i QGIS.msi
