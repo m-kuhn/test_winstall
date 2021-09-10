@@ -30,7 +30,7 @@ jobs:
           
       - name: Install QGIS
         run: |
-          msiexec /i QGIS.msi
+          msiexec.exe /i QGIS.msi
           
       - name: 🦨 Setup tmate session
         if: always()
