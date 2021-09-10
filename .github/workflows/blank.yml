@@ -15,13 +15,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
       - name: Cache installer
+        id: cache-installer
         uses: actions/cache@v2
         with:
           path: |
             QGIS.msi
           key: ${{ env.QGIS_VERSION }}
       - name: Download QGIS
+        if: steps.cache-installer.outputs.cache-hit != 'true'
         run: |
           Invoke-WebRequest -Uri "https://download.osgeo.org/qgis/win64/${{ env.QGIS_VERSION }}.msi" -OutFile "QGIS.msi"
           
