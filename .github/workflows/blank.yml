@@ -22,11 +22,14 @@ jobs:
         with:
           path: |
             QGIS.msi
-          key: ${{ env.QGIS_VERSION }}
+            QGIS.exe
+          key: ${{ env.QGIS_VERSION }}-x
+          
       - name: Download QGIS
         if: steps.cache-installer.outputs.cache-hit != 'true'
         run: |
-          Invoke-WebRequest -Uri "https://download.osgeo.org/qgis/win64/${{ env.QGIS_VERSION }}.msi" -OutFile "QGIS.msi"
+          # Invoke-WebRequest -Uri "https://download.osgeo.org/qgis/win64/${{ env.QGIS_VERSION }}.msi" -OutFile "QGIS.msi"
+          Invoke-WebRequest -Uri "http://download.osgeo.org/qgis/win64/QGIS-OSGeo4W-3.16.7-1-Setup-x86_64.exe" QGIS.exe
           
       - name: Install QGIS
         run: |
