@@ -32,7 +32,7 @@ jobs:
           
       - name: Install QGIS
         run: |
-          osgeo4w-setup.exe -g -k --autoaccept -q -d -o -P qgis-ltr,python3-tools,python3-pip,python3-setuptools -s "http://download.osgeo.org/osgeo4w/v2/x86_64/"
+          ./osgeo4w-setup.exe -g -k --autoaccept -q -d -o -P qgis-ltr,python3-tools,python3-pip,python3-setuptools -s "http://download.osgeo.org/osgeo4w/v2/x86_64/"
           
       - name: 🦨 Setup tmate session
         if: always()
