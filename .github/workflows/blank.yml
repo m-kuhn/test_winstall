@@ -16,24 +16,23 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Cache installer
-        id: cache-installer
-        uses: actions/cache@v2
-        with:
-          path: |
-            QGIS.msi
-            QGIS.exe
-          key: ${{ env.QGIS_VERSION }}-x
+#      - name: Cache installer
+#        id: cache-installer
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            QGIS.msi
+#            QGIS.exe
+#          key: ${{ env.QGIS_VERSION }}-xx
           
       - name: Download QGIS
         if: steps.cache-installer.outputs.cache-hit != 'true'
         run: |
-          # Invoke-WebRequest -Uri "https://download.osgeo.org/qgis/win64/${{ env.QGIS_VERSION }}.msi" -OutFile "QGIS.msi"
-          Invoke-WebRequest -Uri "http://download.osgeo.org/qgis/win64/QGIS-OSGeo4W-3.16.7-1-Setup-x86_64.exe" -OutFile QGIS.exe
+          Invoke-WebRequest -Uri "https://download.osgeo.org/osgeo4w/v2/osgeo4w-setup.exe" -OutFile osgeo4w-setup.exe
           
       - name: Install QGIS
         run: |
-          msiexec.exe /i QGIS.msi
+          osgeo4w-setup.exe -g -k --autoaccept -q -d -o -P qgis-ltr,python3-tools,python3-pip,python3-setuptools -s "http://download.osgeo.org/osgeo4w/v2/x86_64/"
           
       - name: 🦨 Setup tmate session
         if: always()
