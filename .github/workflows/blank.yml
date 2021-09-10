@@ -21,7 +21,10 @@ jobs:
           path: |
             QGIS.msi
           key: ${{ env.QGIS_VERSION }}
-      - name: Install QGIS
+      - name: Download QGIS
         run: |
           Invoke-WebRequest -Uri "https://download.osgeo.org/qgis/win64/${{ env.QGIS_VERSION }}.msi" -OutFile "QGIS.msi"
+          
+      - name: Install QGIS
+        run: |
           msiexec /i QGIS.msi
