@@ -23,5 +23,5 @@ jobs:
           key: ${{ env.QGIS_VERSION }}
       - name: Install QGIS
         run: |
-          (New-Object System.Net.WebClient).DownloadFile("https://download.osgeo.org/qgis/win64/${{ env.QGIS_VERSION }}.msi", "QGIS.msi")
+          wget "https://download.osgeo.org/qgis/win64/${{ env.QGIS_VERSION }}.msi" -outfile "QGIS.msi"
           msiexec /i QGIS.msi
