@@ -28,11 +28,17 @@ jobs:
       - name: Download QGIS
         if: steps.cache-installer.outputs.cache-hit != 'true'
         run: |
-          Invoke-WebRequest -Uri "https://download.osgeo.org/osgeo4w/v2/osgeo4w-setup.exe" -OutFile osgeo4w-setup.exe
+          Invoke-WebRequest -Uri "https://download.osgeo.org/osgeo4w/osgeo4w-setup.exe" -OutFile osgeo4w-setup.exe
           
-      - name: Install QGIS
+      - name: Install python stuff
         run: |
-          ./osgeo4w-setup.exe -g -k --autoaccept -q -d -o -P qgis-ltr,python3-tools,python3-pip,python3-setuptools -s "http://download.osgeo.org/osgeo4w/v2/x86_64/"
+          # Load QGIS-3.16 LTR installer V1 (it comes with python 3.7 instead of 3.9 and other old deps to check)
+          ./osgeo4w-setup.exe -g -k --autoaccept -q -d -o -P python3-tools,python3-pip,python3-setuptools -s "http://download.osgeo.org/osgeo4w/x86_64/"
+        
+      - name: Install python stuff
+        run: |
+          # Load QGIS-3.16 LTR installer V1 (it comes with python 3.7 instead of 3.9 and other old deps to check)
+          ./osgeo4w-setup.exe -g -k --autoaccept -q -d -o -P qgis-ltr -s "http://download.osgeo.org/osgeo4w/x86_64/"
           
       - name: 🦨 Setup tmate session
         if: always()
