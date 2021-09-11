@@ -28,7 +28,7 @@ jobs:
       - name: Download QGIS
         if: steps.cache-installer.outputs.cache-hit != 'true'
         run: |
-          Invoke-WebRequest -Uri "https://download.osgeo.org/osgeo4w/osgeo4w-setup.exe" -OutFile osgeo4w-setup.exe
+          Invoke-WebRequest -Uri "https://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64-v1.exe" -OutFile osgeo4w-setup.exe
           
       - name: Install python stuff
         run: |
